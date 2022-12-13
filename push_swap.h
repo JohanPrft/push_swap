@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: johan <johan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:19:00 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/12 15:37:36 by jprofit          ###   ########.fr       */
+/*   Updated: 2022/12/13 18:42:33 by johan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 
 # define PUSH_SWAP_H
-// # include <stdlib.h>
+# include <stdlib.h>
 // # include <stdarg.h>
-// # include <unistd.h>
+# include <unistd.h>
 
-typedef struct s_list
+typedef struct s_stacks
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	long	*stack_a;
+	int		len_a;
+	int		*stack_b;
+	int		len_b;
+}	t_stacks;
 
 #endif

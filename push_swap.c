@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: johan <johan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:25:30 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/12 16:33:27 by jprofit          ###   ########.fr       */
+/*   Updated: 2022/12/13 18:41:33 by johan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 #include "libft/libft.h"
 
 int	ft_isdigit(int c)
@@ -19,72 +20,113 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_iswhitespace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r')
-		return (1);
-	else
-		return (0);
-}
-
-int	nb_digit(char *list)
+int	strisdigit(const char *str)
 {
 	int	i;
-	int	nb;
 
 	i = 0;
-	nb = 0;
-	while (list[i])
+	while (str[i])
 	{
-		if (!ft_isdigit(list[i]) && !ft_iswhitespace(list[i]))
-			return (-1);
-		while (ft_isdigit(list[i]))
-			i++;
-		nb++;
-		while (ft_iswhitespace(list[i]))
-			i++;
-	}
-	return (nb);
-}
-
-int	list_check(char *list)
-{
-	int	i;
-	int	nb;
-
-	i = 0;
-	nb = nb_digit(list);
-	return (nb);
-}
-
-int	*make_list(char *argv[], int argc)
-{
-	int	i;
-	int	*list;
-
-	i = 0;
-	list = malloc(sizeof(*list) * (argc + 1));
-	while (i < argc - 1)
-	{
-		list[i] = ft_atoi(argv[i + 1]);
-		ft_printf("%i\n", list[i]);
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	list[i] = 0;
-	ft_printf("%i\n", list[i]);
-	return (list);
+	return (1);
 }
 
-int	*manage_argv(char *argv[], int argc)
+void	free_struct(t_stacks *stacks)
 {
-	if (argc > 1)
-		return (make_list(argv, argc));
-	return (0);
+	if (stacks != NULL)
+	{
+		free(stacks->stack_b);
+		free(stacks->stack_a);
+		free(stacks);
+	}
+}
+
+void	ft_error(t_stacks *stacks)
+{
+	free_struct(stacks);
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
+
+int	checkforint(int argc, char *argv[])
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (!strisdigit(argv[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+t_stacks	*init_struct(int argc)
+{
+	t_stacks	*stacks;
+
+	stacks = malloc(sizeof(*stacks));
+	if (!stacks)
+		return (NULL);
+	stacks->stack_a = malloc(sizeof(stacks->stack_a) * (argc - 1));
+	if (!stacks->stack_a)
+	{
+		free(stacks);
+		return (NULL);
+	}
+	stacks->stack_b = malloc(sizeof(stacks->stack_b) * (argc - 1));
+	if (!stacks->stack_b)
+	{
+		free(stacks->stack_a);
+		free(stacks);
+		return (NULL);
+	}
+	return (stacks);
+}
+
+int	checklong(long )
+{
+	int	i;
+
+	i = 0;
+	while (i < stacks->len_a)
+	{
+
+	}
+}
+
+void	fill_struct(int argc, char *argv[], t_stacks *stacks)
+{
+	int	i;
+
+	if (!checkforint(argc, argv))
+		ft_error(stacks);
+	i = 0;
+	while (argv[i + 1])
+	{
+		stacks->stack_a[i] = ft_atoi(argv[i + 1]);
+		ft_printf("%i\n", stacks->stack_a[i]);
+		i++;
+	}
+	stacks->len_a = i;
+	stacks->len_b = 0;
+	if (checklong(stacks) || checkdup(stacks))
+		ft_error(stacks);
 }
 
 int	main(int argc, char *argv[])
 {
-	manage_argv(argv, argc);
+	t_stacks	*stacks;
+
+	if (argc > 1)
+	{
+		stacks = init_struct(argc);
+		fill_struct(argc, argv, stacks);
+		free_struct(stacks);
+	}
 	return (0);
 }
