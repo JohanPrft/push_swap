@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: johan <johan@student.42.fr>                +#+  +:+       +#+         #
+#    By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 10:10:32 by jprofit           #+#    #+#              #
-#    Updated: 2022/12/13 11:35:03 by johan            ###   ########.fr        #
+#    Updated: 2022/12/14 17:06:27 by jprofit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ FLAGS	=	-Wall -Wextra -Werror
 
 HEADER	=	push_swap.h
 
-SRCS	=	push_swap.c
+SRCSFT	=	push_swap_utils.c		push_swap_struct.c		push_swap_op.c
+
+SRCS	=	$(addprefix functions/, ${SRCSFT})
 
 OBJS	=	$(SRCS:.c=.o)
 

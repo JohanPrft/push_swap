@@ -6,7 +6,7 @@
 /*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:46:36 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/12 13:51:39 by jprofit          ###   ########.fr       */
+/*   Updated: 2022/12/14 09:27:56 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_is_whitespace(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	long	res;
 	long	sign;

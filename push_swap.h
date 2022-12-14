@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johan <johan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:19:00 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/13 18:42:33 by johan            ###   ########.fr       */
+/*   Updated: 2022/12/14 18:19:17 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 // # include <stdarg.h>
 # include <unistd.h>
+# include <limits.h>
 
 typedef struct s_stacks
 {
@@ -24,5 +25,24 @@ typedef struct s_stacks
 	int		*stack_b;
 	int		len_b;
 }	t_stacks;
+
+int			ft_isdigit(int c);
+int			strisdigit(const char *str);
+int			checkforint(int argc, char *argv[]);
+int			checklong(t_stacks *stacks);
+int			checkdup(t_stacks *stacks);
+
+t_stacks	*init_struct(int argc);
+void		fill_struct(int argc, char *argv[], t_stacks *stacks);
+void		free_struct(t_stacks *stacks);
+void		ft_error(t_stacks *stacks);
+void		swap_a(t_stacks *stacks);
+
+void		sa(t_stacks *stacks);
+void		sb(t_stacks *stacks);
+void		ss(t_stacks *stacks);
+void		pa(t_stacks *stacks);
+void		pb(t_stacks *stacks);
+
 
 #endif
