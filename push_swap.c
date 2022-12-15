@@ -6,7 +6,7 @@
 /*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:25:30 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/14 18:18:21 by jprofit          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:41:32 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,6 @@ void	printstruct(t_stacks *stacks)
 	ft_printf("\n--------- len = %i ---------\n\n", stacks->len_b);
 }
 
-void	pa(t_stacks *stacks)
-{
-	int	i;
-
-	if (stacks->len_b < 1)
-		return ;
-	i = stacks->len_a;
-	while (i > 0)
-	{
-		stacks->stack_a[i + 1] = stacks->stack_a[i];
-		i--;
-	}
-	stacks->len_a++;
-	stacks->stack_a[0] = stacks->stack_b[0];
-	i = 0;
-	while (i < stacks->len_b)
-	{
-		stacks->stack_b[i] = stacks->stack_b[i + 1];
-		i++;
-	}
-	stacks->len_b--;
-}
-
 int	main(int argc, char *argv[])
 {
 	t_stacks	*stacks;
@@ -83,14 +60,10 @@ int	main(int argc, char *argv[])
 	{
 		stacks = init_struct(argc);
 		fill_struct(argc, argv, stacks);
-		printstruct(stacks);
-		sa(stacks);
-		printstruct(stacks);
+		pb(stacks);
 		pb(stacks);
 		printstruct(stacks);
-		sb(stacks);
-		printstruct(stacks);
-		pa(stacks);
+		rra(stacks);
 		printstruct(stacks);
 		free_struct(stacks);
 	}

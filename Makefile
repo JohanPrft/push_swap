@@ -6,7 +6,7 @@
 #    By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 10:10:32 by jprofit           #+#    #+#              #
-#    Updated: 2022/12/14 17:06:27 by jprofit          ###   ########.fr        #
+#    Updated: 2022/12/15 11:41:03 by jprofit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ FLAGS	=	-Wall -Wextra -Werror
 
 HEADER	=	push_swap.h
 
-SRCSFT	=	push_swap_utils.c		push_swap_struct.c		push_swap_op.c
+SRCSFT	=	push_swap_utils.c		push_swap_struct.c		push_swap_op.c		\
+			push_swap_op1.c			push_swap_op2.c
 
 SRCS	=	$(addprefix functions/, ${SRCSFT})
 
