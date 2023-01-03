@@ -6,7 +6,7 @@
 /*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:19:00 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/15 11:43:09 by jprofit          ###   ########.fr       */
+/*   Updated: 2023/01/02 09:44:32 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,17 @@ void		ss(t_stacks *stacks);
 void		pa(t_stacks *stacks);
 void		pb(t_stacks *stacks);
 
-void	ra(t_stacks *stacks);
-void	rb(t_stacks *stacks);
-void	rr(t_stacks *stacks);
+void		ra(t_stacks *stacks);
+void		rb(t_stacks *stacks);
+void		rr(t_stacks *stacks);
 
+void		rra(t_stacks *stacks);
+void		rrb(t_stacks *stacks);
+void		rrr(t_stacks *stacks);
 
-void	rra(t_stacks *stacks);
-void	rrb(t_stacks *stacks);
-void	rrr(t_stacks *stacks);
+int			is_sort(t_stacks *stacks);
+int			find_max_without(long *array, int len, int nb);
+int			find_index(long *array, int nb);
+void		convert_index(t_stacks *stacks);
 
 #endif

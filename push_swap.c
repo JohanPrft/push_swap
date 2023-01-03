@@ -6,7 +6,7 @@
 /*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:25:30 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/15 11:41:32 by jprofit          ###   ########.fr       */
+/*   Updated: 2023/01/02 09:52:08 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ int	main(int argc, char *argv[])
 	{
 		stacks = init_struct(argc);
 		fill_struct(argc, argv, stacks);
-		pb(stacks);
-		pb(stacks);
 		printstruct(stacks);
-		rra(stacks);
+		convert_index(stacks);
 		printstruct(stacks);
 		free_struct(stacks);
 	}

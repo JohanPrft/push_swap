@@ -20,7 +20,7 @@ FLAGS	=	-Wall -Wextra -Werror
 HEADER	=	push_swap.h
 
 SRCSFT	=	push_swap_utils.c		push_swap_struct.c		push_swap_op.c		\
-			push_swap_op1.c			push_swap_op2.c
+			push_swap_op1.c			push_swap_op2.c			create_index.c
 
 SRCS	=	$(addprefix functions/, ${SRCSFT})
 

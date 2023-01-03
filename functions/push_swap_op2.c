@@ -6,10 +6,9 @@
 /*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:36:28 by jprofit           #+#    #+#             */
-/*   Updated: 2022/12/15 11:42:55 by jprofit          ###   ########.fr       */
+/*   Updated: 2023/01/02 09:45:13 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../push_swap.h"
 #include "../libft/libft.h"
@@ -47,7 +46,6 @@ void	rrb(t_stacks *stacks)
 	}
 	stacks->stack_b[i] = temp;
 }
-
 
 void	rrr(t_stacks *stacks)
 {
