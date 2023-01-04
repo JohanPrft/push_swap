@@ -13,22 +13,7 @@
 #include "../push_swap.h"
 #include "../libft/libft.h"
 
-void	ra(t_stacks *stacks)
-{
-	int	temp;
-	int	i;
 
-	if (stacks->len_b < 2)
-		return ;
-	temp = stacks->stack_a[0];
-	i = 0;
-	while (i < stacks->len_a - 1)
-	{
-		stacks->stack_a[i] = stacks->stack_a[i + 1];
-		i++;
-	}
-	stacks->stack_a[i] = temp;
-}
 
 void	rb(t_stacks *stacks)
 {
@@ -45,10 +30,12 @@ void	rb(t_stacks *stacks)
 		i++;
 	}
 	stacks->stack_b[i] = temp;
+	write(1, "rb\n", 3);
 }
 
 void	rr(t_stacks *stacks)
 {
 	ra(stacks);
 	rb(stacks);
+	write(1, "rr\n", 3);
 }

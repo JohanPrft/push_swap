@@ -28,6 +28,7 @@ void	rra(t_stacks *stacks)
 		i--;
 	}
 	stacks->stack_a[i] = temp;
+	write(1, "rra\n", 4);
 }
 
 void	rrb(t_stacks *stacks)
@@ -45,10 +46,12 @@ void	rrb(t_stacks *stacks)
 		i--;
 	}
 	stacks->stack_b[i] = temp;
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_stacks *stacks)
 {
 	ra(stacks);
 	rb(stacks);
+	write(1, "rrr\n", 4);
 }

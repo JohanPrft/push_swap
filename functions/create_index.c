@@ -19,10 +19,10 @@ int	is_sort(t_stacks *stacks)
 
 	if (stacks->len_b > 0)
 		return (0);
-	i = 0;
-	while (i + 1 <= stacks->len_a)
+	i = 1;
+	while (i < stacks->len_a)
 	{
-		if (stacks->stack_a[i] > stacks->stack_a[i + 1])
+		if (stacks->stack_a[i] < stacks->stack_a[i - 1])
 			return (0);
 		i++;
 	}
@@ -62,7 +62,7 @@ int	find_index(long *array, int nb)
 	return (i);
 }
 
-void	convert_index(t_stacks *stacks)
+long	*convert_index(t_stacks *stacks)
 {
 	long	*index;
 	int		max;
@@ -70,23 +70,23 @@ void	convert_index(t_stacks *stacks)
 	int		i;
 
 	index = malloc(sizeof(*index) * stacks->len_a);
-	i = 1;
-	max = stacks->stack_a[0];
-	while (i < stacks->len_a)
+	if (!index)
 	{
+		free_struct(stacks);
+		return (NULL);
+	}
+	i = 0;
+	max = stacks->stack_a[0];
+	while (++i < stacks->len_a)
 		if (max < stacks->stack_a[i])
 			max = stacks->stack_a[i];
-		i++;
-	}
 	count = stacks->len_a - 1;
 	index[find_index(stacks->stack_a, max)] = count;
-	count--;
-	while (count >= 0)
+	while (--count >= 0)
 	{
 		max = find_max_without(stacks->stack_a, stacks->len_a, max);
 		index[find_index(stacks->stack_a, max)] = count;
-		count--;
 	}
 	free(stacks->stack_a);
-	stacks->stack_a = index;
+	return (index);
 }

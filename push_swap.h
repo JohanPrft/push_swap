@@ -55,6 +55,6 @@ void		rrr(t_stacks *stacks);
 int			is_sort(t_stacks *stacks);
 int			find_max_without(long *array, int len, int nb);
 int			find_index(long *array, int nb);
-void		convert_index(t_stacks *stacks);
+long		*convert_index(t_stacks *stacks);
 
 #endif
