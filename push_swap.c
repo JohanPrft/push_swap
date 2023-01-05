@@ -6,7 +6,7 @@
 /*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:25:30 by jprofit           #+#    #+#             */
-/*   Updated: 2023/01/04 11:35:45 by jprofit          ###   ########.fr       */
+/*   Updated: 2023/01/04 14:36:32 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,70 +52,67 @@ void	printstruct(t_stacks *stacks)
 	ft_printf("\n--------- len = %i ---------\n\n", stacks->len_b);
 }
 
-void	ra(t_stacks *stacks)
+void	sort_two_to_tree(t_stacks *stacks)
 {
-	int	temp;
-	int	i;
-
-	if (stacks->len_a < 2)
-		return ;
-	temp = stacks->stack_a[0];
-	i = 0;
-	while (i < stacks->len_a - 1)
+	if (stacks->len_a == 2 && !is_sort((stacks)))
+		ra(stacks);
+	else if (is_sort(stacks))
+		;
+	else if (stacks->stack_a[0] < stacks->stack_a[2]
+		&& stacks->stack_a[2] < stacks->stack_a[1])
 	{
-		stacks->stack_a[i] = stacks->stack_a[i + 1];
-		i++;
+		sa(stacks);
+		ra(stacks);
 	}
-	stacks->stack_a[i] = temp;
-	write(1, "ra\n", 3);
+	else if (stacks->stack_a[2] < stacks->stack_a[0]
+		&& stacks->stack_a[0] < stacks->stack_a[1])
+		rra(stacks);
+	else if (stacks->stack_a[1] < stacks->stack_a[0]
+		&& stacks->stack_a[0] < stacks->stack_a[2])
+		sa(stacks);
+	else if (stacks->stack_a[1] < stacks->stack_a[2]
+		&& stacks->stack_a[3] < stacks->stack_a[0])
+		ra(stacks);
+	else if (stacks->stack_a[2] < stacks->stack_a[1]
+		&& stacks->stack_a[1] < stacks->stack_a[0])
+	{
+		sa(stacks);
+		rra(stacks);
+	}
 }
 
-void	pa(t_stacks *stacks)
+void	send_small_b(t_stacks *stacks)
 {
 	int	i;
+	int	min;
+	int	index;
 
-	if (stacks->len_b < 1)
-		return ;
-	i = stacks->len_a;
-	while (i > 0)
-	{
-		stacks->stack_a[i] = stacks->stack_a[i - 1];
-		i--;
-	}
-	stacks->stack_a[0] = stacks->stack_b[0];
-	stacks->len_a++;
-	i = 0;
-	while (i < stacks->len_b)
-	{
-		stacks->stack_b[i] = stacks->stack_b[i + 1];
-		i++;
-	}
-	stacks->len_b--;
-	write(1, "pa\n", 3);
-}
-
-void	pb(t_stacks *stacks)
-{
-	int	i;
-
-	if (stacks->len_a < 1)
-		return ;
-	i = stacks->len_b;
-	while (i > 0)
-	{
-		stacks->stack_b[i] = stacks->stack_b[i - 1];
-		i--;
-	}
-	stacks->stack_b[0] = stacks->stack_a[0];
-	stacks->len_b++;
-	i = 0;
+	i = 1;
+	min = stacks->stack_a[0];
 	while (i < stacks->len_a)
 	{
-		stacks->stack_a[i] = stacks->stack_a[i + 1];
+		if (stacks->stack_a[i] < min)
+			min = stacks->stack_a[i];
 		i++;
 	}
-	stacks->len_a--;
-	write(1, "pb\n", 3);
+	index = find_index(stacks->stack_a, min);
+	if (index <= stacks->len_a / 2)
+		while (stacks->stack_a[0] != min)
+			rra(stacks);
+	else
+		while (stacks->stack_a[0] != min)
+			rra(stacks);
+	pb(stacks);
+}
+
+void	sort_four_to_five(t_stacks *stacks)
+{
+	if (stacks->len_a == 5)
+		send_small_b(stacks);
+	send_small_b(stacks);
+	sort_two_to_tree(stacks);
+	while (stacks->stack_a[0] != 0)
+		pa(stacks);
 }
 
 void	radix_sort(t_stacks *stacks)
@@ -150,15 +147,20 @@ int	main(int argc, char *argv[])
 	{
 		stacks = init_struct(argc);
 		fill_struct(argc, argv, stacks);
+		if (is_sort(stacks))
+			exit (0);
 		stacks->stack_a = convert_index(stacks);
 		if (!stacks->stack_a)
 			return (0);
-		//printstruct(stacks);
-		radix_sort(stacks);
-		//printstruct(stacks);
+		printstruct(stacks);
+		if (stacks->len_a <= 3)
+			sort_two_to_tree(stacks);
+		else if (stacks->len_a <= 5)
+			sort_four_to_five(stacks);
+		else
+			radix_sort(stacks);
+		printstruct(stacks);
 		free_struct(stacks);
 	}
 	return (0);
 }
-
-

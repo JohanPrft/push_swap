@@ -13,29 +13,37 @@
 # **************************************************************************** #
 # ARGUMENTS
 
-NAME	=	libpush_swap.a
+NAME	=	push_swap
 
-FLAGS	=	-Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror -g
 
 HEADER	=	push_swap.h
 
 SRCSFT	=	push_swap_utils.c		push_swap_struct.c		push_swap_op.c		\
 			push_swap_op1.c			push_swap_op2.c			create_index.c
 
-SRCS	=	$(addprefix functions/, ${SRCSFT})
+
+
+SRCS	=	$(addprefix functions/, ${SRCSFT})									\
+			push_swap.c
 
 OBJS	=	$(SRCS:.c=.o)
 
 LIBDIR	=	libft/
 
+LIB		=	push_swap
+
 # **************************************************************************** #
 # RULES
 
-all: 			${NAME}
+all: 			${LIB} ${NAME}
 
-${NAME}:		${OBJS}
+${LIB}:			${OBJS}
 				$(MAKE) -C $(LIBDIR)
 				$(AR) rcs $@ $^
+
+${NAME}:		${LIB}
+				$(CC) ${FLAGS} ${OBJS} -l ${LIB} -L ${LIBDIR} -o $@
 
 %.o:			%.c ${HEADER} Makefile
 				${CC} ${FLAGS} -c $< -o $@

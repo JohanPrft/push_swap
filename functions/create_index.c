@@ -17,8 +17,6 @@ int	is_sort(t_stacks *stacks)
 {
 	int	i;
 
-	if (stacks->len_b > 0)
-		return (0);
 	i = 1;
 	while (i < stacks->len_a)
 	{

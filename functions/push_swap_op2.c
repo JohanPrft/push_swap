@@ -21,7 +21,7 @@ void	rra(t_stacks *stacks)
 	if (stacks->len_a < 2)
 		return ;
 	temp = stacks->stack_a[stacks->len_a - 1];
-	i = stacks->len_a;
+	i = stacks->len_a - 1;
 	while (i > 0)
 	{
 		stacks->stack_a[i] = stacks->stack_a[i - 1];
@@ -39,7 +39,7 @@ void	rrb(t_stacks *stacks)
 	if (stacks->len_b < 2)
 		return ;
 	temp = stacks->stack_b[stacks->len_b - 1];
-	i = stacks->len_b;
+	i = stacks->len_b - 1;
 	while (i > 0)
 	{
 		stacks->stack_b[i] = stacks->stack_b[i - 1];
