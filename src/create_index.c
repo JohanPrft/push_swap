@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../includes/push_swap.h"
 #include "../libft/libft.h"
 
 int	is_sort(t_stacks *stacks)

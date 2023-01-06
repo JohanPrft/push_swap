@@ -57,4 +57,9 @@ int			find_max_without(long *array, int len, int nb);
 int			find_index(long *array, int nb);
 long		*convert_index(t_stacks *stacks);
 
+void		sort_two_to_tree(t_stacks *stacks);
+void		send_small_b(t_stacks *stacks);
+void		sort_four_to_five(t_stacks *stacks);
+void		radix_sort(t_stacks *stacks);
+
 #endif

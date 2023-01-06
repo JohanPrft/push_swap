@@ -17,35 +17,38 @@ NAME	=	push_swap
 
 FLAGS	=	-Wall -Wextra -Werror -g
 
-HEADER	=	push_swap.h
+HEADERS	=	push_swap.h
 
-SRCSFT	=	push_swap_utils.c		push_swap_struct.c		push_swap_op.c		\
-			push_swap_op1.c			push_swap_op2.c			create_index.c
+INCLUDES=	$(addprefix includes/, ${HEADERS})
 
+SRCFILE=	push_swap_utils.c		push_swap_struct.c		push_swap_op.c		\
+			push_swap_op1.c			push_swap_op2.c			create_index.c		\
+			sort_algo.c				push_swap.c
 
-
-SRCS	=	$(addprefix functions/, ${SRCSFT})									\
-			push_swap.c
+SRCS	=	$(addprefix src/, ${SRCFILE})
 
 OBJS	=	$(SRCS:.c=.o)
 
 LIBDIR	=	libft/
 
-LIB		=	push_swap
+LIB		= 	libft.a
+
+LIBFULL	=	$(addprefix $(LIBDIR), $(LIB))
+
+LIBSHORT=	$(LIB:lib%.a=%)
 
 # **************************************************************************** #
 # RULES
 
-all: 			${LIB} ${NAME}
+all: 			makelib ${NAME}
 
-${LIB}:			${OBJS}
-				$(MAKE) -C $(LIBDIR)
-				$(AR) rcs $@ $^
+makelib:
+				@$(MAKE) -C $(LIBDIR)
 
-${NAME}:		${LIB}
-				$(CC) ${FLAGS} ${OBJS} -l ${LIB} -L ${LIBDIR} -o $@
+${NAME}:		${LIBFULL} ${OBJS}
+				$(CC) ${FLAGS} -L ${LIBDIR} -l${LIBSHORT} ${OBJS} -o $@
 
-%.o:			%.c ${HEADER} Makefile
+%.o:			%.c ${INCLUDES} Makefile
 				${CC} ${FLAGS} -c $< -o $@
 
 clean:
@@ -59,4 +62,4 @@ fclean:			clean
 re:				fclean
 				$(MAKE) all
 
-.PHONY:			all clean fclean re
+.PHONY:			all makelib clean fclean re
