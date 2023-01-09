@@ -15,17 +15,19 @@
 
 void	free_struct(t_stacks *stacks)
 {
-	if (stacks != NULL)
-	{
-		free(stacks->stack_b);
-		free(stacks->stack_a);
-		free(stacks);
-	}
+	free(stacks->stack_b);
+	free(stacks->stack_a);
+	free(stacks);
 }
 
 void	ft_error(t_stacks *stacks)
 {
-	free_struct(stacks);
+	if (stacks && stacks->stack_b)
+		free(stacks->stack_b);
+	if (stacks && stacks->stack_a)
+		free(stacks->stack_a);
+	if (stacks)
+		free(stacks);
 	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }
@@ -56,24 +58,22 @@ int	main(int argc, char *argv[])
 {
 	t_stacks	*stacks;
 
-	if (argc > 1)
+	if (argc == 2)
+		stacks = make_stacks_and_parse(argv);
+	else
+		stacks = make_stacks(argc, argv);
+	if (is_sort(stacks))
 	{
-		stacks = init_struct(argc);
-		fill_struct(argc, argv, stacks);
-		if (is_sort(stacks))
-			exit (0);
-		stacks->stack_a = convert_index(stacks);
-		if (!stacks->stack_a)
-			return (0);
-		printstruct(stacks);
-		if (stacks->len_a <= 3)
-			sort_two_to_tree(stacks);
-		else if (stacks->len_a <= 5)
-			sort_four_to_five(stacks);
-		else
-			radix_sort(stacks);
-		printstruct(stacks);
 		free_struct(stacks);
+		return (0);
 	}
+	make_stack_index(stacks);
+	if (stacks->len_a <= 3)
+		sort_two_to_tree(stacks);
+	else if (stacks->len_a <= 5)
+		sort_four_to_five(stacks);
+	else
+		radix_sort(stacks);
+	free_struct(stacks);
 	return (0);
 }

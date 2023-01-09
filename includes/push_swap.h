@@ -14,29 +14,16 @@
 
 # define PUSH_SWAP_H
 # include <stdlib.h>
-// # include <stdarg.h>
 # include <unistd.h>
 # include <limits.h>
 
 typedef struct s_stacks
 {
-	long	*stack_a;
-	int		len_a;
-	int		*stack_b;
-	int		len_b;
+	int	*stack_a;
+	int	len_a;
+	int	*stack_b;
+	int	len_b;
 }	t_stacks;
-
-int			ft_isdigit(int c);
-int			strisdigit(const char *str);
-int			checkforint(int argc, char *argv[]);
-int			checklong(t_stacks *stacks);
-int			checkdup(t_stacks *stacks);
-
-t_stacks	*init_struct(int argc);
-void		fill_struct(int argc, char *argv[], t_stacks *stacks);
-void		free_struct(t_stacks *stacks);
-void		ft_error(t_stacks *stacks);
-void		swap_a(t_stacks *stacks);
 
 void		sa(t_stacks *stacks);
 void		sb(t_stacks *stacks);
@@ -52,13 +39,19 @@ void		rra(t_stacks *stacks);
 void		rrb(t_stacks *stacks);
 void		rrr(t_stacks *stacks);
 
+void		ft_error(t_stacks *stacks);
+void		printstruct(t_stacks *stacks);
+
+int			ft_atoi_secure(const char *str, int *var);
+
+t_stacks	*make_stacks(int argc, char **argv);
+t_stacks	*make_stacks_and_parse(char **argv);
+
 int			is_sort(t_stacks *stacks);
-int			find_max_without(long *array, int len, int nb);
-int			find_index(long *array, int nb);
-long		*convert_index(t_stacks *stacks);
+int			find_index(const int *array, int nb);
+void		make_stack_index(t_stacks *stacks);
 
 void		sort_two_to_tree(t_stacks *stacks);
-void		send_small_b(t_stacks *stacks);
 void		sort_four_to_five(t_stacks *stacks);
 void		radix_sort(t_stacks *stacks);
 

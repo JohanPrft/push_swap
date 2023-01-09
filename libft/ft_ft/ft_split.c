@@ -34,7 +34,7 @@ static int	len_str(const char *s, char c)
 	return (i);
 }
 
-static char	**mallocerror(char **tab, int last)
+char	**split_free(char **tab, int last)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ static char	**ft_writestr(char **tab, const char *s, char c, int nbr)
 		len = len_str(s, c);
 		str = malloc(sizeof(char) * (len + 1));
 		if (!str)
-			return (mallocerror(tab, i));
+			return (split_free(tab, i));
 		j = 0;
 		while (j < len)
 			str[j++] = *s++;

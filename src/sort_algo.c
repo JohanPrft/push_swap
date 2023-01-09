@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../libft/libft.h"
 
 void	sort_two_to_tree(t_stacks *stacks)
 {
+	if (is_sort(stacks))
+		return ;
 	if (stacks->len_a == 2 && !is_sort((stacks)))
 		ra(stacks);
-	else if (is_sort(stacks))
-		;
 	else if (stacks->stack_a[0] < stacks->stack_a[2]
 		&& stacks->stack_a[2] < stacks->stack_a[1])
 	{
@@ -32,7 +31,7 @@ void	sort_two_to_tree(t_stacks *stacks)
 		&& stacks->stack_a[0] < stacks->stack_a[2])
 		sa(stacks);
 	else if (stacks->stack_a[1] < stacks->stack_a[2]
-		&& stacks->stack_a[3] < stacks->stack_a[0])
+		&& stacks->stack_a[2] < stacks->stack_a[0])
 		ra(stacks);
 	else if (stacks->stack_a[2] < stacks->stack_a[1]
 		&& stacks->stack_a[1] < stacks->stack_a[0])
@@ -59,7 +58,7 @@ void	send_small_b(t_stacks *stacks)
 	index = find_index(stacks->stack_a, min);
 	if (index <= stacks->len_a / 2)
 		while (stacks->stack_a[0] != min)
-			rra(stacks);
+			ra(stacks);
 	else
 		while (stacks->stack_a[0] != min)
 			rra(stacks);

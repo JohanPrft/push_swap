@@ -45,7 +45,7 @@ all: 			makelib ${NAME}
 makelib:
 				@$(MAKE) -C $(LIBDIR)
 
-${NAME}:		${LIBFULL} ${OBJS}
+${NAME}:		${OBJS}
 				$(CC) ${FLAGS} -L ${LIBDIR} -l${LIBSHORT} ${OBJS} -o $@
 
 %.o:			%.c ${INCLUDES} Makefile
